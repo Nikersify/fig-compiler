@@ -1,0 +1,41 @@
+label super-component
+
+template
+	h1= msg
+
+	button#thing(@click = clicked) foo
+	label(for='thing') bar
+
+	section.footer
+		| bye
+
+style
+	h1 { color: red; }
+
+	button {
+
+
+		border: 2px dashed black;
+
+	}
+
+	label, .section {
+		font-size: 0.5em;
+
+	}
+
+script
+	export default (view, opts, bus) => {
+		view.msg = 'today is a great day!'
+
+		view.clicked = e => {
+			bus.emit('button clicked', e)
+		}
+	}
+
+	export const foo = 'bar'
+
+
+
+	module.exports.baz = 'loo'
+

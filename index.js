@@ -1,31 +1,40 @@
-const pug = require('pug')
 const babel = require('babel-core')
+const pug = require('pug')
 
-module.exports = (input, opts) => {
+module.exports = (input, opts = {}) => {
 	const res = {}
 
 	const lines = input.split('\n')
 
 	const tagContent = tag => {
 		let index = lines.findIndex(x => x.indexOf(tag) === 0)
-		if (index === -1) return null
+		if (index === -1) return ''
 		index += 1
 
-		let endIndex = lines.slice(index)
+		const endIndex = lines.slice(index)
 			.findIndex(x => /^\S/.test(x))
 
-		let content
-		if (endIndex !== -1)
-			content = lines.slice(index, index + endIndex)
-		else
-			content = lines.slice(index)
+		const content = (endIndex !== -1) ?
+			lines.slice(index, index + endIndex) :
+			lines.slice(index)
 
+		// slice off leading indentation
 		const indentIndex = content[0].search(/\S/)
-		return content.map(x => x.slice(indentIndex)).join('\n')
+		content.forEach((x, i) => {
+			content[i] = x.slice(indentIndex)
+		})
+
+		content.unshift(lines[index - 1].slice(tag.length + 1))
+
+		return content.join('\n').trim()
 	}
 
 	// template
-	res.template = pug.compileClient(tagContent('template'))
+	const compiled = pug.compileClient(tagContent('template'))
+
+	// wrap string of pug & its runtime into a function
+	res.template = Function('locals',
+		compiled + '\n' + 'return template(locals);')
 
 	// style
 	res.style = tagContent('style').split('\n').join('').split('\t').join('')
@@ -38,7 +47,7 @@ module.exports = (input, opts) => {
 	res.script = transformed.code
 
 	// name
-	res.name = opts.defaultName
+	res.name = tagContent('label') || opts.defaultName
 
 	return res
 }
