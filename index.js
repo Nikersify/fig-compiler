@@ -1,4 +1,3 @@
-const babel = require('babel-core')
 const pug = require('pug')
 
 module.exports = (input, opts = {}) => {
@@ -40,11 +39,7 @@ module.exports = (input, opts = {}) => {
 	res.style = tagContent('style').split('\n').join('').split('\t').join('')
 
 	// script
-	const scriptContent = tagContent('script')
-	const transformed = babel.transform(scriptContent, {
-		presets: require('babel-preset-es2015')
-	})
-	res.script = transformed.code
+	res.script = tagContent('script')
 
 	// name
 	res.name = tagContent('label') || opts.defaultName
