@@ -5,13 +5,13 @@
     "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {
+    "ava": "^0.19.1",
     "babel-core": "^6.25.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "cheerio": "^1.0.0-rc.1",
-    "css": "^2.2.1",
-    "tape": "^4.6.3"
+    "css": "^2.2.1"
   },
   "scripts": {
-    "test": "tape test/"
+    "test": "ava"
   }
 }
