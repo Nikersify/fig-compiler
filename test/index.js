@@ -1,3 +1,4 @@
+const babel = require('babel-core')
 const cheerio = require('cheerio')
 const compiler = require('../')
 const css = require('css')
@@ -74,7 +75,12 @@ test('compiler', t => {
 		t.test('renders correctly', t => {
 			const Module = module.constructor
 			const m = new Module()
-			m._compile(compiled.script, '')
+
+			// it is encouraged to use es6 modules inside script tags,
+			// therefore a little touch of babel is required for this test
+			m._compile(babel.transform(compiled.script, {
+				plugins: ['transform-es2015-modules-commonjs']
+			}).code, '')
 
 			// exported default function
 			const fn = m.exports.default
