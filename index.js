@@ -17,11 +17,13 @@ module.exports = (input, opts = {}) => {
 			lines.slice(index, index + endIndex) :
 			lines.slice(index)
 
-		// slice off leading indentation
-		const indentIndex = content[0].search(/\S/)
-		content.forEach((x, i) => {
-			content[i] = x.slice(indentIndex)
-		})
+		// slice off leading indentation if needed
+		if (content.length) {
+			const indentIndex = content[0].search(/\S/)
+			content.forEach((x, i) => {
+				content[i] = x.slice(indentIndex)
+			})
+		}
 
 		content.unshift(lines[index - 1].slice(tag.length + 1))
 
@@ -29,7 +31,10 @@ module.exports = (input, opts = {}) => {
 	}
 
 	// template
-	const compiled = pug.compileClient(tagContent('template'))
+	const compiled = pug.compileClient(tagContent('template'), {
+		debug: !!opts.debug,
+		compileDebug: !!opts.debug
+	})
 
 	// wrap string of pug & its runtime into a function
 	res.template = Function('locals',
