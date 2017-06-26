@@ -1,13 +1,17 @@
-// testing everything here
+/* eslint-disable capitalized-comments */
+
+// Testing everything here
+
+import fs from 'fs'
+import path from 'path'
+import vm from 'vm'
 
 import * as babel from 'babel-core'
 import cheerio from 'cheerio'
-import compiler from '../'
 import css from 'css'
-import fs from 'fs'
-import path from 'path'
 import test from 'ava'
-import vm from 'vm'
+
+import compiler from '../'
 
 const fixture = fs.readFileSync(path.join(__dirname, 'Fixture.fig')).toString()
 
@@ -22,7 +26,7 @@ test('name', t => {
 test('template', t => {
 	t.is(typeof compiled.template, 'function', 'is a function')
 
-	const locals = { msg: 'hello world' }
+	const locals = {msg: 'hello world'}
 	const rendered = compiled.template(locals)
 	const $ = cheerio.load(rendered)
 
@@ -60,7 +64,7 @@ test('style', t => {
 test('script', t => {
 	t.is(typeof compiled.script, 'string')
 
-	// it is encouraged to use es6 modules inside script tags,
+	// It is encouraged to use es6 modules inside script tags,
 	// therefore a little touch of babel is required for this test
 	const str = babel.transform(compiled.script, {
 		plugins: ['transform-es2015-modules-commonjs']
@@ -83,7 +87,7 @@ test('script', t => {
 	t.is(view.msg, 'today is a great day!')
 	t.is(typeof view.clicked, 'function')
 
-	// other exports
+	// Other exports
 	t.is(sandbox.exports.foo, 'bar')
 	t.is(sandbox.exports.baz, 'loo')
 })

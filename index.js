@@ -7,18 +7,20 @@ module.exports = (input, opts = {}) => {
 
 	const tagContent = tag => {
 		let index = lines.findIndex(x => x.indexOf(tag) === 0)
-		if (index === -1) return ''
+		if (index === -1) {
+			return ''
+		}
 		index += 1
 
 		const endIndex = lines.slice(index)
 			.findIndex(x => /^\S/.test(x))
 
-		const content = (endIndex !== -1) ?
-			lines.slice(index, index + endIndex) :
-			lines.slice(index)
+		const content = (endIndex === -1) ?
+			lines.slice(index) :
+			lines.slice(index, index + endIndex)
 
-		// slice off leading indentation if needed
-		if (content.length) {
+		// Slice off leading indentation if needed
+		if (content.length > 0) {
 			const indentIndex = content[0].search(/\S/)
 			content.forEach((x, i) => {
 				content[i] = x.slice(indentIndex)
@@ -30,23 +32,23 @@ module.exports = (input, opts = {}) => {
 		return content.join('\n').trim()
 	}
 
-	// template
+	// Template
 	const compiled = pug.compileClient(tagContent('template'), {
-		debug: !!opts.debug,
-		compileDebug: !!opts.debug
+		debug: Boolean(opts.debug),
+		compileDebug: Boolean(opts.debug)
 	})
 
-	// wrap string of pug & its runtime into a function
-	res.template = Function('locals',
-		compiled + '\n' + 'return template(locals);')
+	// Wrap string of pug & its runtime into a function
+	res.template = Function('locals', // eslint-disable-line no-new-func
+		compiled + '\nreturn template(locals);')
 
-	// style
+	// Style
 	res.style = tagContent('style').split('\n').join('').split('\t').join('')
 
-	// script
+	// Script
 	res.script = tagContent('script')
 
-	// name
+	// Name
 	res.name = tagContent('label') || opts.defaultName
 
 	return res

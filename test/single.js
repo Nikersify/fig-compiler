@@ -1,6 +1,7 @@
-// bunch of small tests, mostly checking for unwelcome exceptions
+// Bunch of small tests, mostly checking for unwelcome exceptions
 
 import test from 'ava'
+
 import compiler from '../'
 
 test('empty template', t => {
@@ -51,7 +52,7 @@ test('only template', t => {
 	const c = compiler(fixture)
 
 	t.is(c.template({}), '<h1></h1>')
-	t.is(c.template({ hello: 'hi' }), '<h1>hi</h1>')
+	t.is(c.template({hello: 'hi'}), '<h1>hi</h1>')
 	t.is(c.script, '')
 	t.is(c.name, undefined)
 })
