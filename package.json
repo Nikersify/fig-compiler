@@ -11,6 +11,8 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "cheerio": "^1.0.0-rc.1",
     "css": "^2.2.1",
+    "express": "^4.15.3",
+    "supertest": "^3.0.0",
     "xo": "^0.18.2"
   },
   "scripts": {
