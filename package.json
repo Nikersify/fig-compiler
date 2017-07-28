@@ -1,5 +1,6 @@
 {
   "name": "fig-compiler",
+  "description": "fig.js component compiler",
   "version": "0.0.0",
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",

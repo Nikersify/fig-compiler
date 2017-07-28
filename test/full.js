@@ -1,6 +1,4 @@
-/* eslint-disable capitalized-comments */
-
-// Testing everything here
+// Testing "everything" here
 
 import fs from 'fs'
 import path from 'path'
@@ -42,22 +40,21 @@ test('style', t => {
 	const ast = css.parse(compiled.style)
 	const rules = ast.stylesheet.rules
 
-	// h1 { color: red; }
+	// Expected: h1 { color: red; }
 	t.deepEqual(rules[0].selectors, ['h1'])
 	t.is(rules[0].declarations[0].property, 'color')
 	t.is(rules[0].declarations[0].value, 'red')
 
-	// button { border: 2px dashed black; }
+	// Expected: button { border: 2px dashed black; }
 	t.deepEqual(rules[1].selectors, ['button'])
 	t.is(rules[1].declarations[0].property, 'border')
 	t.is(rules[1].declarations[0].value, '2px dashed black')
 
-	// label, .section { font-size: 0.5em; }
+	// Expected: label, .section { font-size: 0.5em; }
 	t.deepEqual(rules[2].selectors, ['label', '.section'])
 	t.is(rules[2].declarations[0].property, 'font-size')
 	t.is(rules[2].declarations[0].value, '0.5em')
 
-	// exactly 3 rules
 	t.is(rules.length, 3)
 })
 
