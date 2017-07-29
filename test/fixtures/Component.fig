@@ -1,10 +1,14 @@
 label super-component
 
 template
+	include mixin.pug
+
 	h1= msg
 
 	button#thing(@click = clicked) foo
 	label(for='thing') bar
+
+	+mix('42')
 
 	section.footer
 		| bye

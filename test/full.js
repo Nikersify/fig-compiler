@@ -11,7 +11,8 @@ import test from 'ava'
 
 import compiler from '../'
 
-const fixture = fs.readFileSync(path.join(__dirname, 'Fixture.fig')).toString()
+const fixture = fs.readFileSync(path.join(__dirname, 'fixtures/Component.fig'))
+	.toString()
 
 const compiled = compiler(fixture)
 
