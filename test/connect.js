@@ -9,10 +9,10 @@ import fig from '../connect'
 test.cb(t => {
 	const app = express()
 
-	app.use(fig('test'))
+	app.use(fig('test/fixtures'))
 
 	request(app)
-		.get('/Fixture.fig')
+		.get('/Simple.fig')
 		.expect(200)
 		.then(res => {
 			const str = res.text

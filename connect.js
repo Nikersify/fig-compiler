@@ -37,7 +37,7 @@ module.exports = root => {
 
 		const compiled = compiler(fs.readFileSync(p).toString())
 
-		const exported = (name, str, quoted = true) => {
+		const exported = (name, str = '', quoted = true) => {
 			const p = 'module.exports.' + name + ' = '
 
 			if (str === null) {

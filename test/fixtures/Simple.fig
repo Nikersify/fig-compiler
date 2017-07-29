@@ -1,0 +1,5 @@
+template
+	.re
+
+script
+	export default () => {}
