@@ -14,7 +14,9 @@ import compiler from '../'
 const fixture = fs.readFileSync(path.join(__dirname, 'fixtures/Component.fig'))
 	.toString()
 
-const compiled = compiler(fixture)
+const compiled = compiler(fixture, {
+	filePath: path.resolve(__dirname, './fixtures/Component.fig')
+})
 
 test('name', t => {
 	t.is(typeof compiled.name, 'string')
@@ -32,6 +34,7 @@ test('template', t => {
 	t.is($('h1').text(), 'hello world')
 	t.is($('button#thing').text(), 'foo')
 	t.is($('label').text(), 'bar')
+	t.is($('.mixed').text(), '42')
 	t.is($('section.footer').text(), 'bye')
 })
 

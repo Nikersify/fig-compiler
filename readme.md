@@ -12,6 +12,7 @@
 
 Where `input` is a string a of fig component. Available options for the `opts` object are as follows:
 
+- `opts.filePath` - required if you want to use pug's relative includes/extends inside of the component
 - `opts.defaultName` - name set for the component, if the `label` is missing on the component
 - `opts.debug` - if set to `true` passes `debug` and `compileDebug` to [pug](https://pugjs.org/api/reference.html), tldr: if `false` output is smaller, at the cost of some pretty error messages
 

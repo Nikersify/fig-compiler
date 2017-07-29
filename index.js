@@ -35,6 +35,7 @@ module.exports = (input, opts = {}) => {
 
 	// Template
 	const compiled = pug.compileClient(tagContent('template'), {
+		filename: opts.filePath || 'Pug',
 		debug: Boolean(opts.debug),
 		compileDebug: Boolean(opts.debug)
 	})
