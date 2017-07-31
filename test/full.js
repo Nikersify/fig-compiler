@@ -35,6 +35,7 @@ test('template', t => {
 	t.is($('button#thing').text(), 'foo')
 	t.is($('label').text(), 'bar')
 	t.is($('.mixed').text(), '42')
+	t.is($('.__fig-skip#kitty').html(), '<div class="skipped"></div>')
 	t.is($('section.footer').text(), 'bye')
 })
 

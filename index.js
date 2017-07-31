@@ -1,6 +1,14 @@
 const babel = require('babel-core')
 const pug = require('pug')
 
+const mixins = [
+	`
+mixin skip(id)
+	.__fig-skip(id=id)
+		block
+`
+]
+
 module.exports = (input, opts = {}) => {
 	const res = {}
 
@@ -34,7 +42,8 @@ module.exports = (input, opts = {}) => {
 	}
 
 	// Template
-	const compiled = pug.compileClient(tagContent('template'), {
+	const mixinString = mixins.map(x => x.trim()).join('\n') + '\n'
+	const compiled = pug.compileClient(mixinString + tagContent('template'), {
 		filename: opts.filePath || 'Pug',
 		debug: Boolean(opts.debug),
 		compileDebug: Boolean(opts.debug)
