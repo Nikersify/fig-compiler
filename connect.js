@@ -1,11 +1,3 @@
-/* A
-const fig = require('fig-compiler/connect')
-
-app.use(fig('components'))
-
-localhost:3000/Component.fig
-*/
-
 const fs = require('fs')
 const path = require('path')
 const {parse} = require('url')
