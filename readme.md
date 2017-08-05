@@ -2,7 +2,7 @@
 > [fig.js](http://github.com/nikersify/fig) component compiler
 
 [![npm](https://img.shields.io/npm/v/fig-compiler.svg)](https://www.npmjs.com/package/fig-compiler)
-[![travis](https://travis-ci.org/Nikersify/fig-compiler.svg?branch=master)](https://travis-ci.org/Nikersify/fig-compiler)
+[![travis](https://travis-ci.org/nikersify/fig-compiler.svg?branch=master)](https://travis-ci.org/nikersify/fig-compiler)
 
 # usage
 
