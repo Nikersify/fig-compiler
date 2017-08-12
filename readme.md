@@ -27,7 +27,7 @@ Returns an `obj` which has a few properties:
 
 For development pleasure, this module includes a simple connect middleware function, compatible with [express](https://expressjs.com/). Used akin to `express.static` middleware, point it to the directory you store your fig components in, the middleware should compile the component on the fly (without caching) and serve it to the client.
 
-Not to be used in production.
+:warning: Not meant to be used in production.
 
 ### example
 
@@ -44,7 +44,7 @@ app.listen(3000)
 // client.js
 const app = fig()
 app.use('main-view.fig') // pulls from localhost:3000/main-view.fig
-app._components['main-view'] // should be the compiled component
+app._components.get('main-view') // should be the compiled component
 ```
 
 # install
