@@ -12,7 +12,7 @@ mixin skip(id)
 module.exports = (input, opts = {}) => {
 	const res = {}
 
-	const lines = input.split('\n')
+	const lines = input.split(/\r?\n/)
 
 	const tagContent = tag => {
 		let index = lines.findIndex(x => x.indexOf(tag) === 0)
